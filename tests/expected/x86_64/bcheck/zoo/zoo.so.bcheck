@@ -1,0 +1,11 @@
+ERROR: too many states (abstraction error?) in function RunGenCollect
+ERROR: too many states (abstraction error?) in function bcEval_loop
+ERROR: too many states (abstraction error?) in function strptime_internal
+Function zoo_lag
+  [UP] unprotected variable index while calling allocating function R_do_MAKE_CLASS zoo/src/lag.c:300
+  [UP] unprotected variable index while calling allocating function R_do_new_object zoo/src/lag.c:301
+  [UP] unprotected variable index while calling allocating function Rf_allocVector zoo/src/lag.c:278
+  [UP] unprotected variable index while calling allocating function Rf_getAttrib(?,S:index) zoo/src/lag.c:297
+  [UP] unprotected variable index while calling allocating function Rf_getAttrib(?,S:index) zoo/src/lag.c:299
+  [UP] unprotected variable index while calling allocating function Rf_install zoo/src/lag.c:297
+  [UP] unprotected variable index while calling allocating function Rf_install zoo/src/lag.c:299

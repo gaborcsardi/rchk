@@ -1,0 +1,5 @@
+Checked call to R_registerRoutines: 1
+Functions: 55
+Initialization function: R_init_processx
+Library name (usually package name): processx
+WARNING: possible initialization function R_init_processx_unix will not be used by R

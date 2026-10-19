@@ -1,0 +1,5 @@
+ERROR: did not find initialization function R_init_R.bin
+Library name (usually package name): R.bin
+WARNING: possible initialization function R_init_altrep will not be used by R
+WARNING: possible initialization function R_init_base will not be used by R
+WARNING: possible initialization function R_init_jit_enabled will not be used by R
