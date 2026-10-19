@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <llvm/BinaryFormat/Dwarf.h>
+#include <llvm/Config/llvm-config.h>
 #include <llvm/Demangle/Demangle.h>
 #include <llvm/IR/BasicBlock.h>
 #include <llvm/IR/DebugInfo.h>
@@ -576,7 +577,12 @@ bool isSEXP(AllocaInst* ai) {
   }
 
   SmallVector<DbgVariableRecord *, 32> variablesVector;
+#if LLVM_VERSION_MAJOR >= 22
   findDbgUsers(ai, variablesVector); // with -O0 returns only dbg.declare
+#else
+  SmallVector<DbgVariableIntrinsic *, 1> intrinsicsVector; // empty, debug records are used
+  findDbgUsers(intrinsicsVector, ai, &variablesVector);
+#endif
 
   for (auto *variable : variablesVector) {
     if (!variable) continue;
