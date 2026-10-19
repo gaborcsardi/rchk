@@ -1,0 +1,61 @@
+  processx_base64_decode
+  processx_base64_encode
+  processx_set_stderr
+  processx_set_stderr_to_file
+  processx_set_stdout
+  processx_set_stdout_to_file
+  processx_write
+ALLOCATING: processx_base64_decode
+ALLOCATING: processx_base64_encode
+ALLOCATING: processx_set_std
+ALLOCATING: processx_set_stderr
+ALLOCATING: processx_set_stderr_to_file
+ALLOCATING: processx_set_stdout
+ALLOCATING: processx_set_stdout_to_file
+ALLOCATING: processx_write
+ALLOCATOR: processx_base64_decode
+ALLOCATOR: processx_base64_encode
+ALLOCATOR: processx_set_std
+ALLOCATOR: processx_set_stderr
+ALLOCATOR: processx_set_stderr_to_file
+ALLOCATOR: processx_set_stdout
+ALLOCATOR: processx_set_stdout_to_file
+ALLOCATOR: processx_write
+C-ALLOCATING: processx_base64_decode
+C-ALLOCATING: processx_base64_encode
+C-ALLOCATING: processx_set_std
+C-ALLOCATING: processx_set_stderr
+C-ALLOCATING: processx_set_stderr_to_file
+C-ALLOCATING: processx_set_stdout
+C-ALLOCATING: processx_set_stdout_to_file
+C-ALLOCATING: processx_write
+C-ALLOCATOR: processx_base64_decode
+C-ALLOCATOR: processx_base64_encode
+C-ALLOCATOR: processx_set_std
+C-ALLOCATOR: processx_set_stderr
+C-ALLOCATOR: processx_set_stderr_to_file
+C-ALLOCATOR: processx_set_stdout
+C-ALLOCATOR: processx_set_stdout_to_file
+C-ALLOCATOR: processx_write
+CS-ALLOCATING: processx_base64_decode
+CS-ALLOCATING: processx_base64_encode
+CS-ALLOCATING: processx_set_std
+CS-ALLOCATING: processx_set_stderr
+CS-ALLOCATING: processx_set_stderr_to_file
+CS-ALLOCATING: processx_set_stdout
+CS-ALLOCATING: processx_set_stdout_to_file
+CS-ALLOCATING: processx_write
+CS-ALLOCATOR: processx_base64_decode
+CS-ALLOCATOR: processx_base64_encode
+CS-ALLOCATOR: processx_set_std
+CS-ALLOCATOR: processx_set_stderr
+CS-ALLOCATOR: processx_set_stderr_to_file
+CS-ALLOCATOR: processx_set_stdout
+CS-ALLOCATOR: processx_set_stdout_to_file
+CS-ALLOCATOR: processx_write
+Callee protect functions: 
+Callee safe functions (non-trivially, excluding callee-protect): 
+ERROR: too many states (abstraction error?) in function RunGenCollect
+ERROR: too many states (abstraction error?) in function bcEval_loop
+ERROR: too many states (abstraction error?) in function strptime_internal
+Mixed callee-protect/callee-safe functions [ callee-[S]afe callee-[P]rotect caller-protect[!] non-SEXP[-] ]: 

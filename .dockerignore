@@ -1,0 +1,7 @@
+.git
+.claude
+tests/out*
+tests/expected
+tests/baseline
+src/*.o
+src/*.d

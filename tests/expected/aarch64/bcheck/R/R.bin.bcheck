@@ -1,0 +1,480 @@
+ERROR: too many states (abstraction error?) in function R_UnmatchArgs
+ERROR: too many states (abstraction error?) in function RunGenCollect
+ERROR: too many states (abstraction error?) in function bcEval_loop
+ERROR: too many states (abstraction error?) in function bcEval_loop
+ERROR: too many states (abstraction error?) in function do_sprintf
+ERROR: too many states (abstraction error?) in function strptime_internal
+Function ArraySubset
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (xdims <arg 1>), which is later used. src/main/subset.c:547
+  [UP] allocating function Rf_getAttrib(V,S:names) may destroy its unprotected argument (dimnames <arg 1>), which is later used. src/main/subset.c:558
+  [UP] allocating function int_arraySubscript may destroy its unprotected argument (xdims <arg 3>), which is later used. src/main/subset.c:475
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (xdims <arg 1>) src/main/subset.c:547
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (xdims <arg 1>) src/main/subset.c:548
+  [UP] calling allocating function Rf_getAttrib(V,S:names) with a fresh pointer (dimnames <arg 1>) src/main/subset.c:558
+  [UP] unprotected variable dimnames while calling allocating function Rf_ExtractSubset src/main/subset.c:567
+  [UP] unprotected variable dimnames while calling allocating function Rf_allocVector src/main/subset.c:561
+  [UP] unprotected variable xdims while calling allocating function R_alloc src/main/subset.c:464
+  [UP] unprotected variable xdims while calling allocating function R_alloc src/main/subset.c:465
+  [UP] unprotected variable xdims while calling allocating function R_alloc src/main/subset.c:466
+  [UP] unprotected variable xdims while calling allocating function R_alloc src/main/subset.c:467
+  [UP] unprotected variable xdims while calling allocating function Rf_allocVector src/main/subset.c:504
+  [UP] unprotected variable xdims while calling allocating function Rf_allocVector src/main/subset.c:544
+Function EnlargeVector
+  [UP] allocating function EnlargeNames may destroy its unprotected argument (names <arg 1>), which is later used. src/main/subassign.c:168
+  [UP] calling allocating function EnlargeNames with a fresh pointer (names <arg 1>) src/main/subassign.c:168
+  [UP] calling allocating function EnlargeNames with a fresh pointer (names <arg 1>) src/main/subassign.c:271
+Function GetRNGkind
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (seeds <arg 1>), which is later used. src/main/RNG.c:355
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (seeds <arg 1>) src/main/RNG.c:355
+Function HashAdd
+  [UP] unprotected variable val while calling allocating function Rf_cons src/main/saveload.c:868
+Function MatrixAssign
+  [UP] allocating function int_arraySubscript may destroy its unprotected argument (dim <arg 3>), which is later used. src/main/subassign.c:966
+Function MatrixSubset
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (dim <arg 1>), which is later used. src/main/subset.c:377
+  [UP] allocating function Rf_getAttrib(V,S:names) may destroy its unprotected argument (dimnames <arg 1>), which is later used. src/main/subset.c:390
+  [UP] allocating function int_arraySubscript may destroy its unprotected argument (dim <arg 3>), which is later used. src/main/subset.c:321
+  [UP] allocating function int_arraySubscript may destroy its unprotected argument (dim <arg 3>), which is later used. src/main/subset.c:322
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (dim <arg 1>) src/main/subset.c:377
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (dim <arg 1>) src/main/subset.c:378
+  [UP] calling allocating function Rf_getAttrib(V,S:names) with a fresh pointer (dimnames <arg 1>) src/main/subset.c:390
+  [UP] unprotected variable dim while calling allocating function Rf_allocVector src/main/subset.c:330
+  [UP] unprotected variable dim while calling allocating function Rf_allocVector src/main/subset.c:374
+  [UP] unprotected variable dimnames while calling allocating function Rf_ExtractSubset src/main/subset.c:395
+  [UP] unprotected variable dimnames while calling allocating function Rf_ExtractSubset src/main/subset.c:401
+  [UP] unprotected variable dimnames while calling allocating function Rf_allocVector src/main/subset.c:392
+Function PrintLanguage
+  [UP] allocating function Rf_isInteger may destroy its unprotected argument (t <arg 1>), which is later used. src/main/print.c:173
+  [UP] calling allocating function Rf_isInteger with a fresh pointer (t <arg 1>) src/main/print.c:173
+Function R_DispatchOrEvalSP
+  [UP] unprotected variable prom while calling allocating function Rf_DispatchOrEval src/main/subassign.c:1569
+  [UP] unprotected variable prom while calling allocating function Rf_DispatchOrEval src/main/subset.c:671
+Function R_GetSrcFilename
+  [UP] calling allocating function R_findVar(S:filename,?) with a fresh pointer (srcfile <arg 2>) src/main/errors.c:2406
+  [UP] unprotected variable srcfile while calling allocating function Rf_install src/main/errors.c:2406
+Function R_GetTraceback
+  [UP] unprotected variable sref while calling allocating function Rf_deparse1m src/main/errors.c:1576
+Function R_UnmatchArgs
+  [PB] has possible protection stack imbalance src/main/eval.c:9537
+Function R_Unserialize
+  [UP] unprotected variable obj while calling allocating function Rf_endcontext src/main/serialize.c:2319
+Function R_check_class_and_super
+  [UP] allocating function Rf_asChar may destroy its unprotected argument (clattr <arg 1>), which is later used. src/main/objects.c:1123
+  [UP] allocating function Rf_getAttrib(?,S:package) may destroy its unprotected argument (clattr <arg 1>), which is later used. src/main/objects.c:1135
+  [UP] calling allocating function Rf_asChar with a fresh pointer (clattr <arg 1>) src/main/objects.c:1123
+  [UP] calling allocating function Rf_getAttrib(?,S:package) with a fresh pointer (clattr <arg 1>) src/main/objects.c:1135
+  [UP] unprotected variable clattr while calling allocating function Rf_install src/main/objects.c:1139
+Function R_cmpfun
+  [UP] calling allocating function jit_srcref_match with argument allocated using Rf_getAttrib(?,S:srcref) src/main/eval.c:1865
+Function R_data_class
+  [UP] calling allocating function Rf_asChar with a fresh pointer (klass <arg 1>) src/main/attrib.c:715
+Function R_data_class2
+  [UP] calling allocating function S4_extends with a fresh pointer (klass <arg 1>) src/main/attrib.c:866
+Function R_restore_globals
+  [PB] restores PPStackTop from uninitialized local variable src/main/context.c:172
+Function R_seemsOldStyleS4Object
+  [UP] calling allocating function Rf_getAttrib(?,S:package) with a fresh pointer (klass <arg 1>) src/main/objects.c:1806
+Function R_set_prim_method
+  [UP] calling allocating function Rf_asChar with a fresh pointer (internal <arg 1>) src/main/objects.c:1388
+Function R_subset3_dflt
+  [UP] unprotected variable nlist while calling allocating function pstrmatch src/main/subset.c:1346
+Function ReadItem_Iterative
+  [PB] has negative depth src/main/serialize.c:1883
+  [PB] has possible protection stack imbalance src/main/serialize.c:1884
+Function Rf_DropDims
+  [PB] has negative depth src/main/array.c:453
+  [PB] has possible protection stack imbalance src/main/array.c:455
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (dims <arg 1>), which is later used. src/main/array.c:413
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (dims <arg 1>) src/main/array.c:413
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (dims <arg 1>) src/main/array.c:415
+  [UP] unprotected variable dims while calling allocating function Rf_allocVector src/main/array.c:409
+  [UP] unprotected variable dims while calling allocating function Rf_allocVector src/main/array.c:414
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(?,S:dimnames) src/main/array.c:365
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:names) src/main/array.c:408
+Function Rf_GetMatrixDimnames
+  [UP] calling allocating function Rf_getAttrib(V,S:names) with a fresh pointer (dimnames <arg 1>) src/main/attrib.c:1712
+  [UP] unprotected variable nn while calling allocating function Rf_translateChar src/main/attrib.c:1718
+Function Rf_PrintValueRec
+  [UP] unprotected variable cl while calling allocating function Rf_getAttrib(?,S:package) src/main/print.c:857
+Function Rf_SrcrefPrompt
+  [UP] calling allocating function R_findVar(S:filename,?) with a fresh pointer (srcfile <arg 2>) src/main/eval.c:1304
+  [UP] unprotected variable srcfile while calling allocating function Rf_install src/main/eval.c:1304
+Function Rf_applyClosure
+  [UP] calling allocating function handle_exec_continuation with a fresh pointer (val <arg 1>) src/main/eval.c:2336
+Function Rf_asCharacterFactor
+  [UP] unprotected variable labels while calling allocating function Rf_allocVector src/main/coerce.c:1434
+Function Rf_dimnamesgets
+  [UP] unprotected variable dims while calling allocating function Rf_allocVector src/main/attrib.c:1139
+  [UP] unprotected variable dims while calling allocating function Rf_lengthgets src/main/attrib.c:1148
+  [UP] unprotected variable dims while calling allocating function Rf_lengthgets(V,?) src/main/attrib.c:1148
+  [UP] unprotected variable dims while calling allocating function Rf_shallow_duplicate src/main/attrib.c:1153
+  [UP] unprotected variable dims while calling allocating function Rf_shallow_duplicate(V) src/main/attrib.c:1153
+  [UP] unprotected variable dims while calling allocating function as_char_simpl(V) src/main/attrib.c:1169
+Function Rf_eval
+  [UP] unprotected variable tmp while calling allocating function forcePromise src/main/eval.c:1185
+Function Rf_printArray
+  [UP] unprotected variable dnn while calling allocating function Rf_translateChar src/main/printarray.c:470
+  [UP] unprotected variable dnn while calling allocating function Rf_translateChar src/main/printarray.c:471
+  [UP] unprotected variable dnn while calling allocating function Rf_translateChar src/main/printarray.c:473
+  [UP] unprotected variable dnn while calling allocating function Rprintf src/main/printarray.c:463
+  [UP] unprotected variable dnn while calling allocating function Rprintf src/main/printarray.c:469
+  [UP] unprotected variable dnn while calling allocating function Rprintf src/main/printarray.c:473
+  [UP] unprotected variable dnn while calling allocating function Rprintf src/main/printarray.c:475
+  [UP] unprotected variable dnn while calling allocating function Rprintf src/main/printarray.c:478
+  [UP] unprotected variable dnn while calling allocating function Rprintf src/main/printarray.c:481
+  [UP] unprotected variable dnn while calling allocating function Rprintf src/main/printarray.c:482
+  [UP] unprotected variable dnn while calling allocating function Rprintf src/main/printarray.c:506
+  [UP] unprotected variable dnn while calling allocating function printComplexMatrix src/main/printarray.c:495
+  [UP] unprotected variable dnn while calling allocating function printIntegerMatrix src/main/printarray.c:489
+  [UP] unprotected variable dnn while calling allocating function printLogicalMatrix src/main/printarray.c:486
+  [UP] unprotected variable dnn while calling allocating function printRawMatrix src/main/printarray.c:503
+  [UP] unprotected variable dnn while calling allocating function printRealMatrix src/main/printarray.c:492
+  [UP] unprotected variable dnn while calling allocating function printStringMatrix src/main/printarray.c:499
+Function Rf_strmat2intmat
+  [UP] unprotected variable dim while calling allocating function Rf_allocVector src/main/subscript.c:537
+  [UP] unprotected variable dim while calling allocating function Rf_allocVector src/main/subscript.c:539
+Function Rf_yyparse
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2302
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2306
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2314
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2342
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2346
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2350
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2354
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2358
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2362
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2366
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2370
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2374
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2378
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2382
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2386
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2390
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2394
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2398
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2402
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2406
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2410
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2414
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2418
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2422
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2426
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2430
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2434
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2438
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2442
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2446
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2450
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2454
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2458
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2462
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2466
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2470
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2474
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2478
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2482
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2486
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2490
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2494
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2498
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2502
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2506
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2510
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2514
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2518
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2522
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2526
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2530
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2534
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2538
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2542
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2546
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2558
+  [UP] unprotected variable yyval while calling allocating function setId src/main/gram.c:2562
+Function VectorAssign
+  [UP] calling allocating function Rf_mat2indsub with a fresh pointer (dim <arg 1>) src/main/subassign.c:661
+  [UP] calling allocating function Rf_mat2indsub(?,V,?,?) with a fresh pointer (dim <arg 1>) src/main/subassign.c:661
+  [UP] unprotected variable dim while calling allocating function Rf_GetArrayDimnames src/main/subassign.c:655
+  [UP] unprotected variable dim while calling allocating function Rf_isArray src/main/subassign.c:653
+  [UP] unprotected variable dim while calling allocating function Rf_isInteger src/main/subassign.c:660
+  [UP] unprotected variable dim while calling allocating function Rf_isInteger(V) src/main/subassign.c:660
+  [UP] unprotected variable dim while calling allocating function Rf_isMatrix src/main/subassign.c:653
+  [UP] unprotected variable dim while calling allocating function Rf_isMatrix(V) src/main/subassign.c:653
+  [UP] unprotected variable dim while calling allocating function Rf_ncols src/main/subassign.c:653
+  [UP] unprotected variable dim while calling allocating function Rf_ncols(V) src/main/subassign.c:653
+  [UP] unprotected variable dim while calling allocating function Rf_strmat2intmat(V,V,?,?) src/main/subassign.c:656
+  [UP] unprotected variable newnames while calling allocating function Rf_getAttrib(?,S:names) src/main/subassign.c:881
+Function VectorSubset
+  [UP] calling allocating function Rf_ExtractSubset(V,?,?) with a fresh pointer (attrib <arg 1>) src/main/subset.c:239
+  [UP] calling allocating function Rf_ExtractSubset(V,V,?) with a fresh pointer (attrib <arg 1>) src/main/subset.c:239
+  [UP] calling allocating function Rf_mat2indsub with a fresh pointer (dim <arg 1>) src/main/subset.c:201
+  [UP] calling allocating function Rf_mat2indsub(?,V,?,?) with a fresh pointer (dim <arg 1>) src/main/subset.c:201
+  [UP] unprotected variable dim while calling allocating function Rf_GetArrayDimnames src/main/subset.c:195
+  [UP] unprotected variable dim while calling allocating function Rf_isArray src/main/subset.c:193
+  [UP] unprotected variable dim while calling allocating function Rf_isInteger src/main/subset.c:200
+  [UP] unprotected variable dim while calling allocating function Rf_isMatrix src/main/subset.c:193
+  [UP] unprotected variable dim while calling allocating function Rf_ncols src/main/subset.c:193
+  [UP] unprotected variable dim while calling allocating function Rf_strmat2intmat(V,V,?,?) src/main/subset.c:196
+Function WriteItem
+  [UP] calling allocating function OutStringVec with a fresh pointer (name <arg 2>) src/main/serialize.c:1113
+  [UP] unprotected variable name while calling allocating function OutInteger src/main/serialize.c:1112
+  [UP] unprotected variable name while calling allocating function Rf_translateChar src/main/serialize.c:1110
+  [UP] unprotected variable name while calling allocating function Rf_warning src/main/serialize.c:1109
+Function adist_full
+  [PB] has negative depth src/main/agrep.c:482
+  [PB] has possible protection stack imbalance src/main/agrep.c:483
+Function applydefine
+  [PB] has negative depth src/main/eval.c:3550
+  [PB] has possible protection stack imbalance src/main/eval.c:3564
+Function asUTF8
+  [PB] has negative depth src/main/unique.c:1332
+  [PB] has possible protection stack imbalance src/main/unique.c:1336
+Function balancePOSIXlt
+  [PB] has negative depth src/main/datetime.c:1970
+  [PB] has possible protection stack imbalance src/main/datetime.c:1972
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/datetime.c:1855
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/datetime.c:1857
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/datetime.c:1858
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/datetime.c:1859
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/datetime.c:1861
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/datetime.c:1947
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/datetime.c:1960
+  [UP] unprotected variable nm while calling allocating function Rf_classgets(V,V) src/main/datetime.c:1950
+  [UP] unprotected variable nm while calling allocating function Rf_getAttrib(?,S:tzone) src/main/datetime.c:1954
+  [UP] unprotected variable nm while calling allocating function Rf_install src/main/datetime.c:1954
+  [UP] unprotected variable nm while calling allocating function Rf_install src/main/datetime.c:1957
+  [UP] unprotected variable nm while calling allocating function Rf_mkChar src/main/datetime.c:1863
+  [UP] unprotected variable nm while calling allocating function Rf_mkChar src/main/datetime.c:1933
+  [UP] unprotected variable nm while calling allocating function Rf_mkChar src/main/datetime.c:1948
+  [UP] unprotected variable nm while calling allocating function Rf_mkChar src/main/datetime.c:1949
+  [UP] unprotected variable nm while calling allocating function Rf_setAttrib(V,S:names,V) src/main/datetime.c:1945
+  [UP] unprotected variable nm while calling allocating function Rf_setAttrib(V,S:tzone,V) src/main/datetime.c:1957
+  [UP] unprotected variable tz while calling allocating function Rf_install src/main/datetime.c:1957
+Function bcEval_loop
+  [UP] unprotected variable __cell__ while calling allocating function GETSTACK_PTR_TAG src/main/eval.c:8305
+  [UP] unprotected variable __cell__ while calling allocating function GETSTACK_PTR_TAG src/main/eval.c:8307
+  [UP] unprotected variable __cell__ while calling allocating function GETSTACK_PTR_TAG src/main/eval.c:8504
+  [UP] unprotected variable __cell__ while calling allocating function GETSTACK_PTR_TAG src/main/eval.c:8535
+Function cbind
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1296
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1344
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1356
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (u <arg 1>) src/main/bind.c:1296
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (u <arg 1>) src/main/bind.c:1344
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (u <arg 1>) src/main/bind.c:1356
+Function cross_colon
+  [UP] unprotected variable ls while calling allocating function Rf_allocVector src/main/seq.c:55
+  [UP] unprotected variable ls while calling allocating function Rf_allocVector src/main/seq.c:68
+  [UP] unprotected variable ls while calling allocating function Rf_coerceVector src/main/seq.c:56
+  [UP] unprotected variable ls while calling allocating function Rf_coerceVector src/main/seq.c:57
+  [UP] unprotected variable ls while calling allocating function Rf_getAttrib(?,S:levels) src/main/seq.c:52
+  [UP] unprotected variable ls while calling allocating function Rf_mkChar src/main/seq.c:79
+  [UP] unprotected variable ls while calling allocating function Rf_translateChar src/main/seq.c:72
+  [UP] unprotected variable ls while calling allocating function Rf_translateChar src/main/seq.c:75
+  [UP] unprotected variable lt while calling allocating function Rf_allocVector src/main/seq.c:55
+  [UP] unprotected variable lt while calling allocating function Rf_allocVector src/main/seq.c:68
+  [UP] unprotected variable lt while calling allocating function Rf_coerceVector src/main/seq.c:56
+  [UP] unprotected variable lt while calling allocating function Rf_coerceVector src/main/seq.c:57
+  [UP] unprotected variable lt while calling allocating function Rf_mkChar src/main/seq.c:79
+  [UP] unprotected variable lt while calling allocating function Rf_translateChar src/main/seq.c:72
+  [UP] unprotected variable lt while calling allocating function Rf_translateChar src/main/seq.c:75
+Function deparse2buff
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with argument allocated using R_do_slot(?,S:slots) src/main/deparse.c:922
+  [UP] calling allocating function deparse2buff with a fresh pointer (class <arg 1>) src/main/deparse.c:959
+  [UP] calling allocating function deparse2buff(V,?) with a fresh pointer (class <arg 1>) src/main/deparse.c:959
+  [UP] unprotected variable class while calling allocating function Rf_findFun(S:getClassDef,?) src/main/deparse.c:916
+  [UP] unprotected variable class while calling allocating function Rf_install src/main/deparse.c:916
+  [UP] unprotected variable class while calling allocating function Rf_install src/main/deparse.c:917
+  [UP] unprotected variable class while calling allocating function Rf_install src/main/deparse.c:918
+  [UP] unprotected variable class while calling allocating function Rf_translateChar(V) src/main/deparse.c:910
+Function do_adist
+  [PB] has negative depth src/main/agrep.c:732
+  [PB] has possible protection stack imbalance src/main/agrep.c:734
+Function do_agrep
+  [UP] unprotected variable nmold while calling allocating function Rf_allocVector src/main/agrep.c:266
+Function do_aperm
+  [UP] calling allocating function Rf_getAttrib(V,S:names) with a fresh pointer (dna <arg 1>) src/main/array.c:1769
+  [UP] unprotected variable dnna while calling allocating function Rf_translateChar src/main/array.c:1773
+  [UP] unprotected variable dnna while calling allocating function Rf_translateChar src/main/array.c:1776
+Function do_asvector
+  [UP] unprotected variable nms while calling allocating function Rf_duplicate src/main/coerce.c:1551
+Function do_enc2
+  [PB] has negative depth src/main/util.c:2408
+  [PB] has possible protection stack imbalance src/main/util.c:2409
+Function do_eval
+  [UP] unprotected variable srcrefs while calling allocating function Rf_eval src/main/eval.c:3993
+Function do_formatPOSIXlt
+  [UP] unprotected variable tz while calling allocating function Rf_allocVector src/main/datetime.c:1330
+  [UP] unprotected variable tz while calling allocating function Rf_mkChar src/main/datetime.c:1376
+  [UP] unprotected variable tz while calling allocating function Rf_mkChar src/main/datetime.c:1377
+  [UP] unprotected variable tz while calling allocating function Rf_mkChar src/main/datetime.c:1472
+  [UP] unprotected variable tz while calling allocating function Rf_translateChar src/main/datetime.c:1303
+  [UP] unprotected variable tz while calling allocating function Rf_translateChar src/main/datetime.c:1389
+  [UP] unprotected variable tz while calling allocating function set_tz src/main/datetime.c:1309
+Function do_isfinite
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:dimnames) src/main/coerce.c:2586
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:names) src/main/coerce.c:2588
+  [UP] unprotected variable dims while calling allocating function Rf_isArray(V) src/main/coerce.c:2585
+Function do_isinfinite
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:dimnames) src/main/coerce.c:2655
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:names) src/main/coerce.c:2657
+  [UP] unprotected variable dims while calling allocating function Rf_isArray(V) src/main/coerce.c:2654
+Function do_log1arg
+  [UP] unprotected variable tmp while calling allocating function Rf_DispatchGroup src/main/arithmetic.c:1847
+Function do_matprod
+  [UP] unprotected variable dnx while calling allocating function Rf_getAttrib(V,S:names) src/main/array.c:1501
+  [UP] unprotected variable dnx while calling allocating function Rf_getAttrib(V,S:names) src/main/array.c:1541
+  [UP] unprotected variable dnx while calling allocating function Rf_getAttrib(V,S:names) src/main/array.c:1583
+  [UP] unprotected variable xdims while calling allocating function Rf_getAttrib(?,S:dim) src/main/array.c:1317
+  [UP] unprotected variable xdims while calling allocating function Rf_getAttrib(V,S:dim) src/main/array.c:1317
+Function do_nextmethod
+  [UP] calling allocating function Rf_getAttrib(?,S:class) with a fresh pointer (s <arg 1>) src/main/objects.c:796
+Function do_regexpr
+  [PB] has negative depth src/main/grep.c:3301
+  [PB] has possible protection stack imbalance src/main/grep.c:3302
+Function do_relop_dflt
+  [PB] has negative depth src/main/relop.c:420
+  [PB] has possible protection stack imbalance src/main/relop.c:422
+Function do_split
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/./split-incl.c:22
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/./split-incl.c:25
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/./split-incl.c:30
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/./split-incl.c:8
+  [UP] unprotected variable nm while calling allocating function Rf_getAttrib(?,S:names) src/main/./split-incl.c:33
+  [UP] unprotected variable nm while calling allocating function Rf_getAttrib(V,S:levels) src/main/./split-incl.c:27
+  [UP] unprotected variable nm while calling allocating function Rf_setAttrib(?,S:levels,?) src/main/./split-incl.c:26
+  [UP] unprotected variable nm while calling allocating function Rf_setAttrib(?,S:names,V) src/main/./split-incl.c:29
+Function do_sprintf
+  [PB] has negative depth after UNPROTECT(<counter>) src/main/sprintf.c:541
+  [PB] has possible protection stack imbalance src/main/sprintf.c:544
+Function do_strptime
+  [UP] unprotected variable nm while calling allocating function Rf_allocVector src/main/datetime.c:1617
+  [UP] unprotected variable nm while calling allocating function Rf_install src/main/datetime.c:1614
+  [UP] unprotected variable nm while calling allocating function Rf_setAttrib(V,S:balanced,?) src/main/datetime.c:1614
+Function do_subassign2_dflt
+  [UP] unprotected variable names while calling allocating function Rf_get1index src/main/subassign.c:1903
+  [UP] unprotected variable names while calling allocating function Rf_get1index src/main/subassign.c:2091
+Function do_subset2_dflt
+  [UP] unprotected variable dimnames while calling allocating function Rf_get1index src/main/subset.c:1092
+  [UP] unprotected variable dims while calling allocating function R_getS4DataSlot src/main/subset.c:997
+  [UP] unprotected variable dims while calling allocating function Rf_allocVector src/main/subset.c:1084
+Function do_subset_dflt
+  [UP] allocating function Rf_getAttrib(?,S:names) may destroy its unprotected argument (dim <arg 1>), which is later used. src/main/subset.c:873
+  [UP] calling allocating function Rf_allocArray with a fresh pointer (dim <arg 2>) src/main/subset.c:840
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (dim <arg 1>) src/main/subset.c:873
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (dim <arg 1>) src/main/subset.c:874
+  [UP] unprotected variable dim while calling allocating function Rf_ScalarInteger src/main/subset.c:872
+  [UP] unprotected variable dim while calling allocating function Rf_getAttrib(?,S:names) src/main/subset.c:871
+  [UP] unprotected variable dim while calling allocating function VectorSubset src/main/subset.c:861
+  [UP] unprotected variable dim while calling allocating function VectorSubset(V,?,?) src/main/subset.c:861
+Function do_transpose
+  [UP] allocating function Rf_getAttrib(V,S:names) may destroy its unprotected argument (dimnames <arg 1>), which is later used. src/main/array.c:1624
+  [UP] allocating function Rf_getAttrib(V,S:names) may destroy its unprotected argument (dimnames <arg 1>), which is later used. src/main/array.c:1635
+  [UP] calling allocating function Rf_getAttrib(?,S:names) with a fresh pointer (dims <arg 1>) src/main/array.c:1694
+  [UP] calling allocating function Rf_getAttrib(V,S:names) with a fresh pointer (dimnames <arg 1>) src/main/array.c:1624
+  [UP] calling allocating function Rf_getAttrib(V,S:names) with a fresh pointer (dimnames <arg 1>) src/main/array.c:1635
+  [UP] unprotected variable dimnames while calling allocating function Rf_allocVector src/main/array.c:1645
+  [UP] unprotected variable dimnames while calling allocating function Rf_allocVector src/main/array.c:1690
+  [UP] unprotected variable dimnames while calling allocating function Rf_allocVector src/main/array.c:1697
+  [UP] unprotected variable dimnames while calling allocating function Rf_getAttrib(?,S:names) src/main/array.c:1694
+  [UP] unprotected variable dimnames while calling allocating function Rf_setAttrib(?,S:dim,V) src/main/array.c:1704
+  [UP] unprotected variable dimnames while calling allocating function Rf_setAttrib(V,S:names,V) src/main/array.c:1700
+  [UP] unprotected variable dims while calling allocating function Rf_allocVector src/main/array.c:1645
+  [UP] unprotected variable dims while calling allocating function Rf_allocVector src/main/array.c:1690
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:dimnames) src/main/array.c:1621
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:dimnames) src/main/array.c:1631
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:names) src/main/array.c:1615
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:names) src/main/array.c:1624
+  [UP] unprotected variable dims while calling allocating function Rf_getAttrib(V,S:names) src/main/array.c:1635
+  [UP] unprotected variable dims while calling allocating function Rf_ncols(V) src/main/array.c:1628
+  [UP] unprotected variable dims while calling allocating function Rf_nrows(V) src/main/array.c:1629
+  [UP] unprotected variable rnames while calling allocating function Rf_allocVector src/main/array.c:1645
+  [UP] unprotected variable rnames while calling allocating function Rf_allocVector src/main/array.c:1690
+  [UP] unprotected variable rnames while calling allocating function Rf_allocVector src/main/array.c:1697
+  [UP] unprotected variable rnames while calling allocating function Rf_allocVector src/main/array.c:1709
+  [UP] unprotected variable rnames while calling allocating function Rf_getAttrib(?,S:names) src/main/array.c:1694
+  [UP] unprotected variable rnames while calling allocating function Rf_setAttrib(?,S:dim,V) src/main/array.c:1704
+  [UP] unprotected variable rnames while calling allocating function Rf_setAttrib(V,S:names,V) src/main/array.c:1700
+Function do_unlist
+  [UP] unprotected variable names while calling allocating function NewExtractNames src/main/bind.c:1015
+Function do_vapply
+  [UP] unprotected variable dim_v while calling allocating function R_forceAndCall src/main/apply.c:173
+  [UP] unprotected variable dim_v while calling allocating function Rf_allocVector src/main/apply.c:133
+  [UP] unprotected variable dim_v while calling allocating function Rf_allocVector src/main/apply.c:154
+  [UP] unprotected variable dim_v while calling allocating function Rf_allocVector src/main/apply.c:246
+  [UP] unprotected variable dim_v while calling allocating function Rf_coerceVector src/main/apply.c:192
+  [UP] unprotected variable dim_v while calling allocating function Rf_defineVar(S:i,?,?) src/main/apply.c:155
+  [UP] unprotected variable dim_v while calling allocating function Rf_getAttrib(?,S:names) src/main/apply.c:135
+  [UP] unprotected variable dim_v while calling allocating function Rf_getAttrib(V,?) src/main/apply.c:140
+  [UP] unprotected variable dim_v while calling allocating function Rf_install src/main/apply.c:153
+  [UP] unprotected variable dim_v while calling allocating function Rf_lcons src/main/apply.c:162
+  [UP] unprotected variable dim_v while calling allocating function Rf_lcons src/main/apply.c:164
+  [UP] unprotected variable dim_v while calling allocating function Rf_lcons(S:...,?) src/main/apply.c:164
+  [UP] unprotected variable dim_v while calling allocating function Rf_lcons(S:[[,?) src/main/apply.c:162
+  [UP] unprotected variable dim_v while calling allocating function Rf_lcons(S:i,?) src/main/apply.c:162
+Function do_which
+  [UP] unprotected variable v_nms while calling allocating function Rf_allocVector src/main/summary.c:1176
+Function finish_force_promise
+  [PB] has negative depth src/main/eval.c:7501
+  [PB] has possible protection stack imbalance src/main/eval.c:7502
+Function finish_inline_closure_call
+  [PB] has negative depth src/main/eval.c:7442
+  [PB] has negative depth src/main/eval.c:7462
+  [PB] has possible protection stack imbalance src/main/eval.c:7465
+  [UP] calling allocating function handle_exec_continuation with a fresh pointer (value <arg 1>) src/main/eval.c:7460
+Function gregexpr_Regexc
+  [PB] has possible protection stack imbalance src/main/grep.c:2630
+Function hashfun
+  [UP] calling allocating function hashsrcref with argument allocated using Rf_getAttrib(?,S:srcref) src/main/eval.c:1409
+Function inherits3
+  [PB] has negative depth src/main/objects.c:1052
+  [PB] has possible protection stack imbalance src/main/objects.c:1054
+Function lineprof
+  [UP] calling allocating function R_findVar(S:filename,?) with a fresh pointer (srcfile <arg 2>) src/main/eval.c:346
+  [UP] unprotected variable srcfile while calling allocating function Rf_install src/main/eval.c:346
+Function numeric_relop
+  [UP] unprotected variable ans while calling allocating function Rf_isInteger src/main/relop.c:475
+  [UP] unprotected variable ans while calling allocating function Rf_isInteger src/main/relop.c:476
+  [UP] unprotected variable ans while calling allocating function Rf_isInteger src/main/relop.c:481
+Function rbind
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1573
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1601
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1614
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1627
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1640
+  [UP] allocating function Rf_isMatrix may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1653
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1573
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1601
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1614
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1627
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1640
+  [UP] allocating function Rf_nrows may destroy its unprotected argument (u <arg 1>), which is later used. src/main/bind.c:1653
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (u <arg 1>) src/main/bind.c:1573
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (u <arg 1>) src/main/bind.c:1601
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (u <arg 1>) src/main/bind.c:1614
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (u <arg 1>) src/main/bind.c:1627
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (u <arg 1>) src/main/bind.c:1640
+  [UP] calling allocating function Rf_isMatrix with a fresh pointer (u <arg 1>) src/main/bind.c:1653
+  [UP] calling allocating function Rf_nrows with a fresh pointer (u <arg 1>) src/main/bind.c:1573
+  [UP] calling allocating function Rf_nrows with a fresh pointer (u <arg 1>) src/main/bind.c:1601
+  [UP] calling allocating function Rf_nrows with a fresh pointer (u <arg 1>) src/main/bind.c:1614
+  [UP] calling allocating function Rf_nrows with a fresh pointer (u <arg 1>) src/main/bind.c:1627
+  [UP] calling allocating function Rf_nrows with a fresh pointer (u <arg 1>) src/main/bind.c:1640
+  [UP] calling allocating function Rf_nrows with a fresh pointer (u <arg 1>) src/main/bind.c:1653
+Function setup_bcframe_call
+  [PB] has possible protection stack imbalance src/main/eval.c:7418
+Function setup_bcframe_prom
+  [PB] has possible protection stack imbalance src/main/eval.c:7482
+Function vec2buff
+  [UP] allocating function src2buff may destroy its unprotected argument (sv <arg 1>), which is later used. src/main/deparse.c:1907
+  [UP] unprotected variable sv while calling allocating function deparse2buf_name src/main/deparse.c:1906
+  [UP] unprotected variable sv while calling allocating function deparse2buff src/main/deparse.c:1908
+  [UP] unprotected variable sv while calling allocating function linebreak src/main/deparse.c:1904
+Function vsignalError
+  [PB] has negative depth src/main/errors.c:1847
+  [PB] has possible protection stack imbalance src/main/errors.c:1872
+Function xxexprlist1
+  [UP] allocating function GrowList may destroy its unprotected argument (ans <arg 1>), which is later used. src/main/gram.c:3218
+  [UP] calling allocating function GrowList with a fresh pointer (ans <arg 1>) src/main/gram.c:3218
+  [UP] unprotected variable ans while calling allocating function SetSingleSrcRef(V) src/main/gram.c:3215
+  [UP] unprotected variable ans while calling allocating function makeSrcref src/main/gram.c:3214

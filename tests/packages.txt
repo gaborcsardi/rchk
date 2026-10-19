@@ -1,0 +1,10 @@
+# CRAN packages checked by the tests: <name> <version>
+# Versions must match the CRAN snapshot in config.sh.
+#
+# Packages with rchk reports (to catch missed reports):
+data.table 1.18.4
+processx 3.9.0
+zoo 1.8-15
+# Packages with a lot of C code and no rchk reports (to catch false alarms):
+jsonlite 2.0.0
+commonmark 2.0.0
