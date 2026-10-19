@@ -5,6 +5,8 @@
   Some of the false alarms can be avoided through simple fixes.
   
   The intended name for this was unescaped-argument-expressions.
+
+  This tool doesn't use the cache.
 */
 
 #include "common.h"
@@ -22,7 +24,7 @@
 #include <llvm/Support/raw_ostream.h>
 
 #include "allocators.h"
-#include "cgclosure.h"
+#include "cginfo.h"
 
 using namespace llvm;
 
@@ -146,7 +148,7 @@ enum ArgExpKind {
   AK_FRESH         // allocation and possibly returning a fresh object
 };
 
-ArgExpKind classifyArgumentExpression(Value *arg, FunctionsInfoMapTy& functionsMap, unsigned gcFunctionIndex, FunctionsSetTy& possibleAllocators) {
+ArgExpKind classifyArgumentExpression(Value *arg, FunctionsInfoMapTy& functionsMap, CanReachVectorTy& canReachGC, FunctionsSetTy& possibleAllocators) {
 
   if (!CallInst::classof(arg)) {
     // argument does not come (immediatelly) from a call
@@ -159,7 +161,7 @@ ArgExpKind classifyArgumentExpression(Value *arg, FunctionsInfoMapTy& functionsM
     return AK_NOALLOC;
   }
 
-  if (!isAllocatingFunction(fun, functionsMap, gcFunctionIndex)) {
+  if (!isAllocatingFunction(fun, functionsMap, canReachGC)) {
     // argument does not come from a call to an allocating function
     return AK_NOALLOC;
   }
@@ -211,9 +213,10 @@ int main(int argc, char* argv[])
   Module *m = parseArgsReadIR(argc, argv, functionsOfInterestSet, functionsOfInterestVector, context);  
   
   FunctionsInfoMapTy functionsMap;
-  buildCGClosure(m, functionsMap, true /* ignore error paths */);
+  buildCGInfo(m, functionsMap, true /* ignore error paths */);
   
   unsigned gcFunctionIndex = getGCFunctionIndex(functionsMap, m);
+  CanReachVectorTy canReachGC = computeCanReachToIndex(functionsMap, gcFunctionIndex);
 
   FunctionsSetTy possibleAllocators;
   findPossibleAllocators(m, possibleAllocators); // FIXME: use context-sensitive (more precise) allocator detection
@@ -260,7 +263,7 @@ int main(int argc, char* argv[])
           k = AK_NOALLOC;
           for(unsigned i = 0; i < nvals; i++) {
             Value* incoming = phi->getIncomingValue(i);
-            ArgExpKind cur = classifyArgumentExpression(incoming, functionsMap, gcFunctionIndex, possibleAllocators);
+            ArgExpKind cur = classifyArgumentExpression(incoming, functionsMap, canReachGC, possibleAllocators);
             if (isLoadOfUnprotectedObject(incoming, const_cast<Instruction*>(inst), possibleAllocators, dominatorTree)) {
               cur = AK_FRESH;
             }
@@ -270,7 +273,7 @@ int main(int argc, char* argv[])
             }
           }
         } else {
-          k = classifyArgumentExpression(o, functionsMap, gcFunctionIndex, possibleAllocators);
+          k = classifyArgumentExpression(o, functionsMap, canReachGC, possibleAllocators);
           if (isLoadOfUnprotectedObject(o, const_cast<Instruction*>(inst), possibleAllocators, dominatorTree)) {
             k = AK_FRESH;
           }

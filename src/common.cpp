@@ -61,30 +61,48 @@ void sortFunctionsByName(FunctionsOrderedSetTy& functionsOfInterestSet, Function
 //     from that module (but some tools need to do whole-program analysis
 //     which also will include functions from the base
 //      IR file not included in the module)
-Module *parseArgsReadIR(int argc, char* argv[], FunctionsOrderedSetTy& functionsOfInterestSet, FunctionsVectorTy& functionsOfInterestVector, LLVMContext& context) {
+//
+// all usages above take also an optional [--cache cache_file] argument
+// if provided, the cache file is used by some tools to speed up the analysis; see specific tool for details
+Module *parseArgsReadIR(int argc, char* argv[], FunctionsOrderedSetTy& functionsOfInterestSet, FunctionsVectorTy& functionsOfInterestVector, LLVMContext& context, std::string *cacheFile) {
 
-  if (argc > 3) {
-    errs() << argv[0] << " base_file.bc [module_file.bc]" << "\n";
+  std::vector<std::string> args;
+  for (int i = 0; i < argc; ++i) {
+    if (std::string(argv[i]) == "--cache") {
+      ++i;
+      if (i < argc) {
+        if (cacheFile) *cacheFile = argv[i];
+      } else {
+        errs() << "ERROR: --cache requires a cache file path" << "\n";
+        exit(1);
+      }
+    } else {
+      args.push_back(argv[i]);
+    }
+  }
+
+  if (args.size() > 3) {
+    errs() << args[0] << " [--cache cache_file] base_file.bc [module_file.bc]" << "\n";
     exit(1);
   }
 
   SMDiagnostic error;
   std::string baseFname;
   
-  if (argc == 1) {
+  if (args.size() == 1) {
     baseFname = "R.bin.bc";  
   } else {
-    baseFname = argv[1];
+    baseFname = args[1];
   }
   
   Module* base = parseIRFile(baseFname, error, context).release();
   if (!base) {
     errs() << "ERROR: Cannot read base IR file " << baseFname << "\n";
-    error.print(argv[0], errs());
+    error.print(args[0].c_str(), errs());
     exit(1);
   }
   
-  if (argc == 1 || argc == 2) {
+  if (args.size() == 1 || args.size() == 2) {
     // only a single input file
     for(Module::iterator f = base->begin(), fe = base->end(); f != fe; ++f) {
       Function *fun = &*f;
@@ -95,11 +113,11 @@ Module *parseArgsReadIR(int argc, char* argv[], FunctionsOrderedSetTy& functions
   }
   
   // have two input files
-  std::string moduleFname = argv[2];
+  std::string moduleFname = args[2];
   std::unique_ptr<Module> module = parseIRFile(moduleFname, error, context);
   if (!module) {
     errs() << "ERROR: Cannot read module IR file " << moduleFname << "\n";
-    error.print(argv[0], errs());
+    error.print(args[0].c_str(), errs());
     exit(1);  
   }
   std::string errorMessage;
@@ -226,17 +244,16 @@ std::string computeVarName(const AllocaInst *var) {
   return "<unnamed var: " + instructionAsString(var) + ">";
 }
 
+static VarNamesTy varNamesCache;
 std::string varName(const AllocaInst *var) {
-
-  static VarNamesTy cache;
   
-  auto vsearch = cache.find(var);
-  if (vsearch != cache.end()) {
+  auto vsearch = varNamesCache.find(var);
+  if (vsearch != varNamesCache.end()) {
     return vsearch->second;
   }
   
   std::string name = computeVarName(var);
-  cache.insert({var, name});
+  varNamesCache.insert({var, name});
   return name;
 }
 
@@ -469,14 +486,15 @@ bool isSEXP(GlobalVariable *gv) {
 
 bool TRVS_DBG = false;
 typedef std::pair<Value*, int> ValueDepthPair;
+static std::map<ValueDepthPair, bool> traverseToSEXPCache;
+
 // checks whether value can be traced to SEXP
 // depth 0 checks for SEXP, depth 1 checks for SEXP*, etc.
 bool traverseToSEXP(Value* start, int depth) {
   if (!start) return false;
 
-  static std::map<ValueDepthPair, bool> cache;
-  auto search = cache.find({start, depth});
-  if (search != cache.end()) {
+  auto search = traverseToSEXPCache.find({start, depth});
+  if (search != traverseToSEXPCache.end()) {
     return search->second;
   }
 
@@ -495,8 +513,8 @@ bool traverseToSEXP(Value* start, int depth) {
     if (!curr->getType()->isPointerTy()) continue;
 
     // check global cache
-    auto cached = cache.find({curr, currDepth});
-    if (cached != cache.end() && cached->second) {
+    auto cached = traverseToSEXPCache.find({curr, currDepth});
+    if (cached != traverseToSEXPCache.end() && cached->second) {
       if (TRVS_DBG) errs() << "Found SEXP source in cache: " << *curr << "\n";
       result = true;
       ended = true;
@@ -566,8 +584,13 @@ bool traverseToSEXP(Value* start, int depth) {
     }
     if (ended) break;
   }
-  cache[{start, depth}] = result;
+  traverseToSEXPCache[{start, depth}] = result;
   return result;
+}
+
+void clearCommonCaches() {
+  varNamesCache.clear();
+  traverseToSEXPCache.clear();
 }
 
 bool isSEXP(AllocaInst* ai) {

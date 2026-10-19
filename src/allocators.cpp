@@ -204,19 +204,20 @@ void findPossibleAllocators(Module *m, FunctionsSetTy& possibleAllocators) {
   }
   
   FunctionsInfoMapTy functionsMap;
-  buildCGClosure(m, functionsMap, true /* ignore error paths */, &onlyFunctions, &onlyEdges, gcFunction /* assume external functions allocate */);
+  buildCGInfo(m, functionsMap, true /* ignore error paths */, &onlyFunctions, &onlyEdges, gcFunction /* assume external functions allocate */);
 
   for(CallEdgesMapTy::iterator cei = onlyEdges.begin(), cee = onlyEdges.end(); cei != cee; ++cei) {
     delete cei->second;
   }
   
   unsigned gcFunctionIndex = getGCFunctionIndex(functionsMap, m);
+  CanReachVectorTy canReachGC = computeCanReachToIndex(functionsMap, gcFunctionIndex);
 
   for(FunctionsInfoMapTy::iterator fi = functionsMap.begin(), fe = functionsMap.end(); fi != fe; ++fi) {
     Function *f = const_cast<Function *>(fi->second.function);
     if (!f) continue;
 
-    if ((fi->second.callsFunctionMap)[gcFunctionIndex]) {
+    if (canReachGC[fi->second.index]) {
       possibleAllocators.insert(f);
     }
   }
@@ -224,7 +225,7 @@ void findPossibleAllocators(Module *m, FunctionsSetTy& possibleAllocators) {
   possibleAllocators.insert(gcFunction);
 }
 
-bool isAllocatingFunction(Function *fun, FunctionsInfoMapTy& functionsMap, unsigned gcFunctionIndex) {
+bool isAllocatingFunction(Function *fun, FunctionsInfoMapTy& functionsMap, CanReachVectorTy& canReachGC) {
   if (!fun || isAssertedNonAllocating(fun)) {
     return false;
   }
@@ -235,7 +236,7 @@ bool isAllocatingFunction(Function *fun, FunctionsInfoMapTy& functionsMap, unsig
   }
   FunctionInfo& finfo = fsearch->second;
 
-  return (finfo.callsFunctionMap)[gcFunctionIndex];
+  return canReachGC[finfo.index];
 }
 
 void findAllocatingFunctions(Module *m, FunctionsSetTy& allocatingFunctions) {
@@ -250,15 +251,16 @@ void findAllocatingFunctions(Module *m, FunctionsSetTy& allocatingFunctions) {
   }
   
   FunctionsInfoMapTy functionsMap;
-  buildCGClosure(m, functionsMap, true /* ignore error paths */, &onlyFunctions, NULL, getGCFunction(m) /* assume external functions allocate */);
+  buildCGInfo(m, functionsMap, true /* ignore error paths */, &onlyFunctions, NULL, getGCFunction(m) /* assume external functions allocate */);
 
   unsigned gcFunctionIndex = getGCFunctionIndex(functionsMap, m);
+  CanReachVectorTy canReachGC = computeCanReachToIndex(functionsMap, gcFunctionIndex);
 
   for(FunctionsInfoMapTy::iterator fi = functionsMap.begin(), fe = functionsMap.end(); fi != fe; ++fi) {
     Function *f = const_cast<Function *>(fi->second.function);
     if (!f) continue;
 
-    if ((fi->second.callsFunctionMap)[gcFunctionIndex]) {
+    if (canReachGC[fi->second.index]) {
       allocatingFunctions.insert(f);
     }
   }

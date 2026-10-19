@@ -12,7 +12,7 @@ LABEL maintainer="tomas.kalibera@gmail.com"
 ARG DEBIAN_FRONTEND=noninteractive
 ARG LLVM_VERSION=22
 ARG RCHK_REPO=https://github.com/kvapca/rchk
-ARG RCHK_REF=llvm22
+ARG RCHK_REF=llvm22-cache
 ARG R_SVN_REVISION=HEAD
 
 RUN apt-get update && \
@@ -76,7 +76,7 @@ RUN apt-get update && \
   cd rchk && \
   git rev-parse HEAD > git_version && \
   cd src && \
-  env CXX=clang++-${LLVM_VERSION} LLVM=${LLVM} make -j 4 bcheck maacheck fficheck && \
+  env CXX=clang++-${LLVM_VERSION} LLVM=${LLVM} make -j 4 bcheck maacheck fficheck cachegen && \
   rm -f *.o *.dwo *.cpp *.h *d Makefile && \
   cd .. && \
   dpkg --clear-selections && \
@@ -122,6 +122,7 @@ RUN export WLLVM_BC_STORE="$RCHK/bcstore" && \
   cd .. && \
   extract-bc ./build/lib/R/bin/exec/R && \
   mv ./build/lib/R/bin/exec/R.bc ./build/R.bc && \
+  bash $RCHK/scripts/ensure_cache.sh ./build/R.bc ./build/R.bc.cache && \
   rm -rf trunk && \
   echo 'options(repos = c(CRAN="https://cran.r-project.org"))' > build/lib/R/etc/Rprofile.site && \
   dpkg --clear-selections && \

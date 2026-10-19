@@ -1,6 +1,8 @@
 /*
   This tool is to detect global variables/structures that may (accidentally)
   hold SEXPs, but possibly are not known as roots to the GC.
+
+  This tool doesn't use the cache.
 */ 
 
 #include "common.h"

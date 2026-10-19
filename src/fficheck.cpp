@@ -2,6 +2,8 @@
   This tool is to detect problems in foreign function interfaces.  It is
   primarily written to check return type of .Call and .External function
   registered via the C registration API.
+
+  This tool doesn't use the cache.
 */ 
 
 #include "common.h"
