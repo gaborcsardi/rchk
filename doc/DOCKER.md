@@ -5,8 +5,7 @@ CRAN/BIOC are installed automatically.
 [Docker](https://www.docker.com/) is available for free for Linux, macOS and
 Windows.  I've tested the rchk container on Ubuntu 20.04 (package docker.io,
 19.03.8), on macOS (Docker Desktop, 19.03.13) and on Windows (Docker
-Desktop, 19.03.13). Docker is not officially supported on Fedora 32 (one may
-use rchk singularity container, instead).
+Desktop, 19.03.13). Docker is not officially supported on Fedora 32.
 
 The rchk docker image is inspired by an earlier image from Filip Krikava.
 
@@ -19,10 +18,10 @@ docker pull kalibera/rchk:latest
 ## Checking a package from CRAN/BIOC
 
 ```
-docker run kalibera/rchk:latest audio
+docker run --rm kalibera/rchk:latest audio
 ```
 
-The output ends with
+The output ends with (for an earlier version of audio package)
 
 ```
 Installed libraries of package  audio 
@@ -73,10 +72,10 @@ container can access them. More details are provided in the following.
 To check a package tarball (on Linux and macOS)
 
 ```
-# wget https://cran.r-project.org/src/contrib/lazy_1.2-16.tar.gz
+# wget https://cran.r-project.org/src/contrib/Archive/lazy/lazy_1.2-16.tar.gz
 mkdir packages
 cp lazy_1.2-16.tar.gz packages
-docker run -v `pwd`/packages:/rchk/packages kalibera/rchk:latest /rchk/packages/lazy_1.2-16.tar.gz
+docker run --rm -v `pwd`/packages:/rchk/packages kalibera/rchk:latest /rchk/packages/lazy_1.2-16.tar.gz
 ```
 
 On Windows:
@@ -84,7 +83,7 @@ On Windows:
 ```
 mkdir packages
 copy lazy_1.2-16.tar.gz packages
-docker run -v %cd%/packages:/rchk/packages kalibera/rchk:latest /rchk/packages/lazy_1.2-16.tar.gz
+docker run --rm -v %cd%/packages:/rchk/packages kalibera/rchk:latest /rchk/packages/lazy_1.2-16.tar.gz
 ````
 
 In the above, directory `packages` is made available to the container under
@@ -152,7 +151,7 @@ R package dependencies are installed automatically, so running (omit `-p` on Win
 
 ```
 mkdir -p packages
-docker run -v `pwd`/packages:/rchk/packages kalibera/rchk:latest xts
+docker run --rm -v `pwd`/packages:/rchk/packages kalibera/rchk:latest xts
 ```
 
 installs automatically dependencies `zoo` and `lattice`. These packages are
@@ -174,7 +173,7 @@ For example, checking Rmpfr (omit `-p` on Windows)
 
 ```
 mkdir -p packages
-docker run -v `pwd`/packages:/rchk/packages kalibera/rchk:latest Rmpfr
+docker run --rm -v `pwd`/packages:/rchk/packages kalibera/rchk:latest Rmpfr
 ```
 
 fails, because it needs mpfr library to be installed in the container, but
@@ -186,7 +185,7 @@ instruct the container to install these Ubuntu packages before checking
 
 ```
 mkdir -p packages
-docker run -v `pwd`/packages:/rchk/packages kalibera/rchk:latest --install-deb "libgmp-dev libmpfr-dev"  Rmpfr
+docker run --rm -v `pwd`/packages:/rchk/packages kalibera/rchk:latest --install-deb "libgmp-dev libmpfr-dev"  Rmpfr
 ```
 
 Note that while `packages`, when made available to the container, can keep the
@@ -210,7 +209,7 @@ user.
 ## Modifying the container
 
 To avoid the need of installing Ubuntu packages on every invocation of the
-container, one can modify to container to already contain those. For
+container, one can modify the container to already contain those. For
 example, create this Dockerfile in an empty directory:
 
 ```
@@ -244,7 +243,7 @@ follows (omit `-p` on Windows):
 
 ```
 mkdir -p packages
-docker run -v `pwd`/packages:/rchk/packages 1be53728bdf4 Rmpfr
+docker run --rm -v `pwd`/packages:/rchk/packages 1be53728bdf4 Rmpfr
 ```
 
 ## Using the container interactively
@@ -254,7 +253,7 @@ is useful for troubleshooting the container, perhaps experimenting with
 which Ubuntu packages are needed, etc:
 
 ```
-docker run -it --entrypoint /bin/bash kalibera/rchk:latest
+docker run --rm -it --entrypoint /bin/bash kalibera/rchk:latest
 ```
 
 The container entry point is in `/container.sh` script, which can be run

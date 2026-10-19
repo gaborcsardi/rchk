@@ -103,6 +103,9 @@ ENV LLVM_CC_NAME=clang-${LLVM_VERSION} \
   LLVM_LINK_NAME=llvm-link-${LLVM_VERSION} \
   LLVM_AR_NAME=llvm-ar-${LLVM_VERSION}
 
+ARG CRAN
+ENV CRAN=${CRAN:-https://cran.R-project.org}
+
 # Build R using WLLVM and install core dependencies to build R packages
 RUN export WLLVM_BC_STORE="$RCHK/bcstore" && \
   sed -i 's/^# deb-src/deb-src/g' /etc/apt/sources.list && \
@@ -124,7 +127,7 @@ RUN export WLLVM_BC_STORE="$RCHK/bcstore" && \
   mv ./build/lib/R/bin/exec/R.bc ./build/R.bc && \
   bash $RCHK/scripts/ensure_cache.sh ./build/R.bc ./build/R.bc.cache && \
   rm -rf trunk && \
-  echo 'options(repos = c(CRAN="https://cran.r-project.org"))' > build/lib/R/etc/Rprofile.site && \
+  echo 'options(repos = c(CRAN="'$CRAN'"))' > build/lib/R/etc/Rprofile.site && \
   dpkg --clear-selections && \
   dpkg --set-selections < /pkgs.sel && \
   apt-get -yq dselect-upgrade && \

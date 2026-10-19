@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # ssh server and other tools
@@ -43,6 +43,6 @@ RUN chown -R vagrant /home/vagrant/.ssh && \
 RUN echo "Europe/Prague" > /etc/timezone && \
   dpkg-reconfigure -f noninteractive tzdata
 
-ENV DEBIAN_FRONTEND teletype
+ENV DEBIAN_FRONTEND=teletype
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]

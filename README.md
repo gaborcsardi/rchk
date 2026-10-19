@@ -16,24 +16,22 @@ itself. Several installation options are provided, including containers.
 
 ## Installation
 
-The tool is available in pre-built containers, Docker and Singularity, for
+The tool is available in a pre-built Docker container, for
 *non-interactive* use. The container is invoked as a command to check a
 particular package:
 
 ```
 docker pull kalibera/rchk:latest
-docker run kalibera/rchk:latest audio
+docker run --rm kalibera/rchk:latest audio
+
+mkdir packages
+cp lazy_1.2-16.tar.gz packages
+docker run --rm -v `pwd`/packages:/rchk/packages kalibera/rchk:latest /rchk/packages/lazy_1.2-16.tar.gz
 ```
 
-```
-singularity pull shub://kalibera/rchk:def
-singularity run kalibera-rchk-master-def.simg jpeg
-```
-
-For more details, see [Docker rchk container](doc/DOCKER.md) and 
-[Singularity rchk container](doc/SINGULARITY.md). This setup is good for
-occasional checking of a single package. Docker clients are
-available for Linux, macOS and Windows. Singularity only for Linux.
+For more details, see [Docker rchk container](doc/DOCKER.md).  This setup is
+good for occasional checking of a single package.  Docker clients are
+available for Linux, macOS and Windows.
 
 The tool can also be used interactively in a virtual machine running Ubuntu,
 which can be automatically installed using Vagrant scripts. This setup is
@@ -44,7 +42,9 @@ check the same package and easier to customize the process. See
 Finally, the tool can be installed natively on Linux, compiled from source.
 This setup is good for interactive use and reduces disk space overhead. The
 setup is not automated, but only requires several steps described for recent
-Linux distributions. See [Native installation on Linux for interactive use](doc/INSTALLATION.md).
+Linux distributions (on latest distributions with LLVM > 14, one however has
+to compile LLVM 14 from source).
+See [Native installation on Linux for interactive use](doc/INSTALLATION.md).
 
 An alternative docker image is also available from third parties on R-hub
 (`rhub/ubuntu-rchk`,
@@ -66,7 +66,7 @@ dependencies needed by that package.
 	* `../scripts/build_r.sh` (*in automated install*, `/opt/rchk/scripts/build_r.sh`)
 2. Install and check the package
 	* `echo 'install.packages("jpeg",repos="http://cloud.r-project.org")' |  ./bin/R --no-echo`
-	* `../scripts/check_package.sh jpeg` (in VM install, `/opt/rchk/scripts/check_package.sh jpeg`)
+	* `../scripts/check_package.sh jpeg` (*in automated install*, `/opt/rchk/scripts/check_package.sh jpeg`)
 
 The output of the checking is in files
 `packages/lib/jpeg/libs/jpeg.so.*check`. For version 0.1-8 of the package,
@@ -83,18 +83,35 @@ only contains something like
 Analyzed 15 functions, traversed 1938 states.
 ```
 
+Version 0.1-10 of the package no longer has the error, `jpeg.so.bcheck`
+currently contains something like
+
+```
+ERROR: too many states (abstraction error?) in function strptime_internal
+ERROR: too many states (abstraction error?) in function StringValue
+ERROR: too many states (abstraction error?) in function RunGenCollect
+ERROR: too many states (abstraction error?) in function tre_tnfa_run_parallel
+Analyzed 17 functions, traversed 815 states.
+```
+
+Errors about "too many states" can be ignored, this means that the tool
+could not analyze some R functions in the memory limit provided.
+
 To check the next package, just follow the same steps, installing it into
 this customized version of R.  When checking a tarball, one would typically
 first install the CRAN/BIOC version of the package to get all dependencies
 in, and then use `R CMD INSTALL` to install the newest version to check from
 the tarball.
 
+Warnings like `objdump: Warning: Unrecognized form: 0x22` should be safe to
+ignore.
+
 One can reduce the number of required R package dependencies by only
 installing LinkingTo dependencies of the package and then installing the
 package with `--libs-only` option (only shared libraries are built and
 installed). This is enough to build shared libraries of most but not all
-packages. Docker and singularity rchk containers for non-interactive use do
-this, see `scripts/utils.r` and definitions of the containers for more
+packages. The Docker container for non-interactive use does
+this, see `scripts/utils.r` and definitions of the container for more
 details.
 
 Further information:
@@ -103,5 +120,3 @@ Further information:
 * [User documentation](doc/USAGE.md) - how to use the tools and what they check.
 * [Internals](doc/INTERNALS.md) - how the tools work internally.
 * [Building](doc/BUILDING.md) - how to get the necessary bitcode files for R/packages; this is now encapsulated in scripts, but the background is here
-
-[![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/2534)
