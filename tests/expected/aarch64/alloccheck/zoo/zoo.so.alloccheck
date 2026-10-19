@@ -1,0 +1,27 @@
+  zoo_lagts !S!
+ALLOCATING: R_init_zoo
+ALLOCATING: zoo_coredata
+ALLOCATING: zoo_lag
+ALLOCATING: zoo_lagts
+ALLOCATOR: zoo_coredata
+ALLOCATOR: zoo_lag
+ALLOCATOR: zoo_lagts
+C-ALLOCATING: R_init_zoo
+C-ALLOCATING: zoo_coredata
+C-ALLOCATING: zoo_lag
+C-ALLOCATING: zoo_lag(?,V,?)
+C-ALLOCATING: zoo_lagts
+C-ALLOCATOR: zoo_coredata
+C-ALLOCATOR: zoo_lag
+C-ALLOCATOR: zoo_lag(?,V,?)
+C-ALLOCATOR: zoo_lagts
+CS-ALLOCATING: R_init_zoo
+CS-ALLOCATING: zoo_coredata
+CS-ALLOCATING: zoo_lag
+CS-ALLOCATING: zoo_lagts
+CS-ALLOCATOR: zoo_coredata
+CS-ALLOCATOR: zoo_lag
+CS-ALLOCATOR: zoo_lagts
+Callee protect functions: 
+Callee safe functions (non-trivially, excluding callee-protect): 
+Mixed callee-protect/callee-safe functions [ callee-[S]afe callee-[P]rotect caller-protect[!] non-SEXP[-] ]: 

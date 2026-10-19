@@ -3,7 +3,7 @@
 
 HOST := $(shell hostname -s)
 
-ifeq ($(HOST), prg)
+ifeq ($(HOST), lin)
   LLVM := /usr
   CXX := g++
 #  CXX := $(LLVM)/bin/clang++
@@ -24,8 +24,23 @@ else ifeq ($(HOST), r-lnx400)
   BCHECK_MAX_STATES := 6000000
   CALLOCATORS_MAX_STATES := 1000000
 
+else ifeq ($(HOST), r-lnx404)
+  LLVM := /var/scratch/tomas/llvm/llvm14_libcxx
+  CXX := g++
+#  CXX := $(LLVM)/bin/clang++
+  BCHECK_MAX_STATES := 6000000
+  CALLOCATORS_MAX_STATES := 1000000
+
 else ifeq ($(HOST), pod)
   LLVM = /usr/lib/llvm-8
+  CXX := g++
+#  CXX := $(LLVM)/bin/clang++
+  BCHECK_MAX_STATES := 800000
+  CALLOCATORS_MAX_STATES := 1000000
+
+else ifeq ($(HOST), lunovo)
+#   LLVM = /lib/llvm-14
+  LLVM = /lib/llvm-22
   CXX := g++
 #  CXX := $(LLVM)/bin/clang++
   BCHECK_MAX_STATES := 800000
@@ -104,13 +119,18 @@ SOURCES := $(wildcard *.cpp)
 DEPENDS := $(SOURCES:.cpp=.d)
 OBJECTS := $(SOURCES:.cpp=.o)
 DWOBJECTS := $(SOURCES:.cpp=.dwo)
-SOBJECTS := $(filter-out %check.o, $(OBJECTS))
+SOBJECTS := $(filter-out %check.o cachetest.o cachegen.o, $(OBJECTS))
 
+CACHE := cachetest cachegen
 TOOLS := errcheck symcheck sfpcheck csfpcheck maacheck bcheck ueacheck alloccheck glcheck veccheck cgcheck fficheck
 
-all: $(TOOLS)
+all: $(TOOLS) $(CACHE)
 
 alloccheck: alloccheck.o $(SOBJECTS)
+
+cachetest: cachetest.o $(SOBJECTS)
+
+cachegen: cachegen.o $(SOBJECTS)
 
 errcheck: errcheck.o $(SOBJECTS)
 
@@ -135,7 +155,7 @@ glcheck: glcheck.o $(SOBJECTS)
 fficheck: fficheck.o $(SOBJECTS)
 
 clean:
-	rm -f $(OBJECTS) $(DEPENDS) $(TOOLS) $(DWOBJECTS)
+	rm -f $(OBJECTS) $(DEPENDS) $(TOOLS) $(CACHE) $(DWOBJECTS)
 
 info:
 	@echo "CPPFLAGS: $(CPPFLAGS)"

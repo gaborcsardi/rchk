@@ -1,0 +1,9 @@
+Package: rchktest
+Title: Test Cases for rchk
+Version: 0.0.1
+Description: Functions with known protection and FFI bugs, and correct
+    variants of them. Used by the rchk unit tests, see tests/unit/README.md.
+License: GPL-2
+Authors@R: person("rchk", "authors", role = c("aut", "cre"), email = "nobody@example.com")
+Encoding: UTF-8
+NeedsCompilation: yes

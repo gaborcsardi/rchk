@@ -1,0 +1,4 @@
+Checked call to R_registerRoutines: 1
+Functions: 2
+Initialization function: R_init_zoo
+Library name (usually package name): zoo

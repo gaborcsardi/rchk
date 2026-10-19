@@ -1,0 +1,4 @@
+Checked call to R_registerRoutines: 1
+Functions: 21
+Initialization function: R_init_jsonlite
+Library name (usually package name): jsonlite

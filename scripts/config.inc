@@ -1,7 +1,7 @@
 
 # to be customized and sourced by bash before running other scripts
 
-if [ X"`hostname -s`" == Xprg ] ; then
+if [ X"`hostname -s`" == Xlin ] ; then
 
   export WLLVM=/usr/local/bin
   export LLVM=/usr
@@ -10,7 +10,7 @@ if [ X"`hostname -s`" == Xprg ] ; then
 elif [ X"`hostname -s`" == Xr-lnx400 -o X"`hostname -s`" == Xr-lnx404 ] ; then
 
   export WLLVM=/space/tkalibera/.local/bin
-  export LLVM=/usr
+  export LLVM=/var/scratch/tomas/llvm/llvm14_libcxx
   export RCHK=/space/tkalibera/git/rchk
 
 elif [ X"`hostname -s`" == Xra ] ; then
@@ -30,6 +30,12 @@ elif [ X"`hostname -s`" == Xpod ] ; then
   export WLLVM=/usr/local/bin
   export LLVM=/usr/lib/llvm-8
   export RCHK=/home/tomas/work/git/rchk
+
+elif [ X"`hostname -s`" == Xlunovo ] ; then
+
+  export WLLVM=/usr/local/bin
+  export LLVM=/lib/llvm-22
+  export RCHK=/home/kvasa/Documents/programming/FIT/BAP/rchk
 
 else
   echo "Please specify directories in config.inc" >&2
