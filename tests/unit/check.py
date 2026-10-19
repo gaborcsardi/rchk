@@ -58,9 +58,25 @@ def read_annotations(srcdir):
     return annotations, words
 
 
+def mangled_parts(name):
+    """Name parts of a mangled C++ global, e.g. _ZN6Holder6sharedE -> [Holder, shared]."""
+    m = re.match(r'^_Z(?:L|N)(.*?)E?$', name)
+    if not m:
+        return []
+    parts, rest = [], m.group(1)
+    while True:
+        n = re.match(r'^(\d+)', rest)
+        if not n:
+            return parts
+        length = int(n.group(1))
+        start = len(n.group(1))
+        parts.append(rest[start:start + length])
+        rest = rest[start + length:]
+
+
 def is_package_name(name, words):
-    # also accept mangled C++ names of internal globals, e.g. _ZL7gholder
-    return name in words or re.sub(r'^_ZL\d+', '', name) in words
+    # also accept mangled C++ names, e.g. _ZL7gholder or _ZN6Holder6sharedE
+    return name in words or any(p in words for p in mangled_parts(name))
 
 
 def read_reports(tool, path, words):

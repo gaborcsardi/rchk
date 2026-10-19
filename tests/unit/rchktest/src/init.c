@@ -32,6 +32,10 @@ SEXP ok_ffi_const(const SEXP x) {
   return x;
 }
 
+SEXP ok_ffi_sexprec(struct SEXPREC *x) { /* rchk-false: fficheck: function ok_ffi_sexprec .*parameter 1 is not SEXP -- struct SEXPREC \* is not recognized since the LLVM 22 port (PR 46) */
+  return x;
+}
+
 /* --- other test cases --------------------------------------------------- */
 
 SEXP up_simple(void);
@@ -56,6 +60,7 @@ SEXP ok_uea(SEXP x);
 SEXP use_globals(SEXP x);
 SEXP use_stops(SEXP x);
 SEXP use_holder(SEXP x);
+SEXP use_static_holder(SEXP x);
 
 #define CALLDEF(name, n) { #name, (DL_FUNC) &name, n }
 
@@ -65,6 +70,7 @@ static const R_CallMethodDef callMethods[] = {
   CALLDEF(ffi_bad_arity, 2),
   CALLDEF(ok_ffi_typedef, 1),
   CALLDEF(ok_ffi_const, 1),
+  CALLDEF(ok_ffi_sexprec, 1),
   CALLDEF(up_simple, 0),
   CALLDEF(up_after_unprotect, 0),
   CALLDEF(up_getattrib_names, 1),
@@ -87,6 +93,7 @@ static const R_CallMethodDef callMethods[] = {
   CALLDEF(use_globals, 1),
   CALLDEF(use_stops, 1),
   CALLDEF(use_holder, 1),
+  CALLDEF(use_static_holder, 1),
   { NULL, NULL, 0 }
 };
 
