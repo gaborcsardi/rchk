@@ -18,7 +18,7 @@ static struct {
 static union {
   SEXP s;
   double d;
-} gunion; /* rchk-missed: glcheck: structure with SEXP fields gunion -- unions are not checked since the LLVM 22 port (PR 46) */
+} gunion; /* rchk: glcheck: structure with SEXP fields gunion */
 
 static struct {
   int n;

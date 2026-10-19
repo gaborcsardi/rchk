@@ -24,7 +24,7 @@ SEXP ffi_bad_arity(SEXP x) { /* rchk: fficheck: function ffi_bad_arity .*has ari
   return x;
 }
 
-SEXP ok_ffi_typedef(myobj_t x) { /* rchk-false: fficheck: function ok_ffi_typedef .*parameter 1 is not SEXP -- typedefs of SEXP are not recognized since the LLVM 22 port (PR 46) */
+SEXP ok_ffi_typedef(myobj_t x) {
   return x;
 }
 
@@ -32,7 +32,7 @@ SEXP ok_ffi_const(const SEXP x) {
   return x;
 }
 
-SEXP ok_ffi_sexprec(struct SEXPREC *x) { /* rchk-false: fficheck: function ok_ffi_sexprec .*parameter 1 is not SEXP -- struct SEXPREC \* is not recognized since the LLVM 22 port (PR 46) */
+SEXP ok_ffi_sexprec(struct SEXPREC *x) {
   return x;
 }
 

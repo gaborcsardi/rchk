@@ -278,26 +278,27 @@ DIType *stripQualifiers(DIType *type) {
   return type;
 }
 
-// SEXP is defined via typedef struct SEXPREC *SEXP;
-bool isSEXP(DIType *type) {
-  if (!type) return false;
+// strips qualifiers (see stripQualifiers) and typedefs
+DIType *stripQualifiersAndTypedefs(DIType *type) {
   type = stripQualifiers(type);
-  if (!type) return false;
-
-  // check typedef SEXP
-  if (auto *derivedType = dyn_cast<DIDerivedType>(type)){
-    if (derivedType->getTag() != dwarf::DW_TAG_typedef) return false;
-    if (derivedType->getName() != "SEXP") return false;
-
+  while (auto *derivedType = dyn_cast_or_null<DIDerivedType>(type)) {
+    if (derivedType->getTag() != dwarf::DW_TAG_typedef) break;
     type = stripQualifiers(derivedType->getBaseType());
-    if (!type) return false;
   }
-  else return false;
+  return type;
+}
+
+// SEXP is defined via typedef struct SEXPREC *SEXP;
+// accepts any typedefs and qualifiers around the pointer and the struct,
+// e.g. SEXP, const SEXP, typedef SEXP myobj_t, struct SEXPREC *
+bool isSEXP(DIType *type) {
+  type = stripQualifiersAndTypedefs(type);
+  if (!type) return false;
 
   // check pointer
   if (auto *derivedType = dyn_cast<DIDerivedType>(type)){
     if (derivedType->getTag() != dwarf::DW_TAG_pointer_type) return false;
-    type = stripQualifiers(derivedType->getBaseType());
+    type = stripQualifiersAndTypedefs(derivedType->getBaseType());
     if (!type) return false;
   }
   else return false;

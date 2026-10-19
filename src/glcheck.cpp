@@ -109,13 +109,20 @@ bool containsSEXP(DIType *t, DITypeSetTy& visited, Module* m) {
     if (composite->getTag() == dwarf::DW_TAG_array_type)
       return containsSEXP(composite->getBaseType(), visited, m);
 
-    if (composite->getTag() == dwarf::DW_TAG_structure_type) {
-      if (composite->getName() == "SEXPREC" || composite->getName() == "struct SEXPREC") {
+    auto tag = composite->getTag();
+    if (tag == dwarf::DW_TAG_structure_type || tag == dwarf::DW_TAG_union_type ||
+        tag == dwarf::DW_TAG_class_type) {
+      if (tag == dwarf::DW_TAG_structure_type &&
+          (composite->getName() == "SEXPREC" || composite->getName() == "struct SEXPREC")) {
         return true;
       }
-  
+
+      // elements of C++ classes also include methods (DISubprogram)
+      // static members are not stored in the structure
       for (auto *element : composite->getElements()) {
-        if (containsSEXP(cast<DIType>(element), visited, m)) {
+        auto *elementType = dyn_cast_or_null<DIType>(element);
+        if (!elementType || elementType->isStaticMember()) continue;
+        if (containsSEXP(elementType, visited, m)) {
           return true;
         }
       }

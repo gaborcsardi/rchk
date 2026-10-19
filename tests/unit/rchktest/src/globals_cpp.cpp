@@ -19,7 +19,7 @@ public:
 
 SEXP Holder::shared = NULL; /* rchk: glcheck: non-symbol SEXP global variable _ZN6Holder6sharedE */
 
-static Holder gholder; /* rchk-missed: glcheck: structure with SEXP fields _ZL7gholder -- C++ classes are not checked since the LLVM 22 port (PR 46) */
+static Holder gholder; /* rchk: glcheck: structure with SEXP fields _ZL7gholder */
 
 // the only SEXP is a static member, which is not stored in the object
 class StaticHolder {
