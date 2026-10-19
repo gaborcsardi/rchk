@@ -1015,11 +1015,8 @@ CS-ALLOCATOR: which
 CS-ALLOCATOR: whichwrapper
 Callee protect functions: 
 Callee safe functions (non-trivially, excluding callee-protect): 
-ERROR: too many states (abstraction error?) in function RunGenCollect
-ERROR: too many states (abstraction error?) in function bcEval_loop
 ERROR: too many states (abstraction error?) in function freadMain
 ERROR: too many states (abstraction error?) in function rbindlist
-ERROR: too many states (abstraction error?) in function strptime_internal
 GOOD: NOT-CALLOCATOR but ALLOCATOR: ghead
 GOOD: NOT-CALLOCATOR but ALLOCATOR: gtail
 GOOD: NOT-CALLOCATOR but ALLOCATOR: substitute_call_arg_namesR
